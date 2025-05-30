@@ -1,4 +1,4 @@
-import { getPostBySlug } from '../../../lib/posts'
+import { getPostBySlug } from '../../lib/posts'
 import Image from 'next/image'
 import Link from 'next/link'
 
