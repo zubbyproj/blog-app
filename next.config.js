@@ -3,6 +3,9 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ['fs', 'path']
   },
+  images: {
+    domains: ['source.unsplash.com']
+  },
   webpack: (config, { isServer }) => {
     if (!isServer) {
       // Don't attempt to resolve these modules on the client

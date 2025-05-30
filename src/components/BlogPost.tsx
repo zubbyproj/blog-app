@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
@@ -12,12 +14,13 @@ interface BlogPostProps {
 
 export default function BlogPost({ title, date, excerpt, slug, imageUrl }: BlogPostProps) {
   const [imageError, setImageError] = useState(false)
+  const fallbackImage = 'https://source.unsplash.com/800x600/?coding'
 
   return (
     <article className="group bg-white bg-opacity-60 backdrop-blur-sm rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 border border-sky-100">
       <div className="relative w-full h-56">
         <Image
-          src={imageError ? 'https://source.unsplash.com/800x600/?coding' : imageUrl}
+          src={imageError ? fallbackImage : imageUrl}
           alt={title}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
