@@ -21,8 +21,8 @@ export default async function PostPage({
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
-      <article className="prose lg:prose-xl">
+    <main className="py-12">
+      <article className="prose lg:prose-xl mx-auto">
         <Link href="/" className="text-blue-600 hover:text-blue-800 no-underline mb-8 block">
           ← Back to home
         </Link>
