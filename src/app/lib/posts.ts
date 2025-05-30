@@ -24,6 +24,21 @@ export interface PaginatedPosts {
   currentPage: number
 }
 
+function getPlaceholderImage(slug: string): string {
+  // List of reliable placeholder images from Unsplash
+  const placeholderImages = [
+    'https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?w=800&auto=format&fit=crop&q=80', // Code
+    'https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=800&auto=format&fit=crop&q=80', // Laptop
+    'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop&q=80', // Code on screen
+    'https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&auto=format&fit=crop&q=80', // Code
+    'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&auto=format&fit=crop&q=80', // Keyboard
+  ]
+  
+  // Use the slug to consistently select the same image for each post
+  const index = slug.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % placeholderImages.length
+  return placeholderImages[index]
+}
+
 export const getPaginatedPosts = cache(async (page: number = 1): Promise<PaginatedPosts> => {
   const allPosts = await getAllPosts()
   const totalPosts = allPosts.length
@@ -84,8 +99,8 @@ export const getAllPosts = cache(async (): Promise<Post[]> => {
           return null
         }
 
-        // Generate a fallback image URL if none is provided
-        const imageUrl = data.imageUrl || `/images/${slug.toLowerCase().replace(/ /g, '-')}.jpg`
+        // Update the image URL generation
+        const imageUrl = data.imageUrl || getPlaceholderImage(slug)
 
         return {
           slug,
@@ -125,8 +140,8 @@ export const getPostBySlug = cache(async (slug: string): Promise<Post | null> =>
       .process(content)
     const contentHtml = processedContent.toString()
 
-    // Generate a fallback image URL if none is provided
-    const imageUrl = data.imageUrl || `/images/${slug.toLowerCase().replace(/ /g, '-')}.jpg`
+    // Update the image URL generation
+    const imageUrl = data.imageUrl || getPlaceholderImage(slug)
 
     return {
       slug,
