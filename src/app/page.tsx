@@ -16,52 +16,52 @@ export default async function Home({ searchParams }: HomeProps) {
     <main className="py-12">
       <section className="mb-16 relative overflow-hidden">
         {/* Decorative background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-blue-50 to-teal-50">
+        <div className="absolute inset-0 bg-white bg-opacity-40 backdrop-blur-sm rounded-3xl">
           <div className="absolute inset-0 opacity-30" style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(99, 102, 241, 0.15) 1px, transparent 0)`,
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(56, 189, 248, 0.1) 1px, transparent 0)`,
             backgroundSize: '40px 40px'
           }} />
         </div>
 
         {/* Content */}
-        <div className="relative py-20 px-4">
+        <div className="relative py-16 px-4">
           <div className="max-w-4xl mx-auto text-center">
-            {/* Decorative elements */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-full"></div>
-            
-            <h1 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500 mb-6 tracking-tight">
+            <h1 className="text-5xl font-bold text-gray-800 mb-6 tracking-tight">
               Welcome to My Blog
-              <span className="block text-2xl mt-3 bg-gradient-to-r from-blue-500 to-teal-400">
+              <span className="block text-2xl mt-3 text-sky-500">
                 Thoughts, Stories & Ideas
               </span>
             </h1>
             
-            <p className="text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto mt-8 relative">
-              <span className="absolute -left-4 -top-4 text-4xl text-indigo-200 opacity-50">"</span>
+            <p className="text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto mt-8 relative">
+              <span className="absolute -left-4 -top-4 text-4xl text-sky-200 opacity-50">"</span>
               Explore my thoughts and insights on web development, technology, and programming.
               Here you'll find in-depth articles about Next.js, React, and modern web development practices.
-              <span className="absolute -right-4 -bottom-4 text-4xl text-indigo-200 opacity-50">"</span>
+              <span className="absolute -right-4 -bottom-4 text-4xl text-sky-200 opacity-50">"</span>
             </p>
           </div>
         </div>
-
-        {/* Bottom decorative line */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
       </section>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {posts.map((post) => (
-          <BlogPost key={post.slug} {...post} />
-        ))}
+      {/* Blog posts grid with proper centering */}
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-8">
+          {posts.map((post) => (
+            <div key={post.slug} className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)]">
+              <BlogPost {...post} />
+            </div>
+          ))}
+        </div>
       </div>
       
-      <div className="mt-8 flex justify-center gap-4">
+      {/* Pagination with updated styling */}
+      <div className="mt-12 flex justify-center gap-3">
         <Link
           href={`/?page=${currentPage - 1}`}
-          className={`px-4 py-2 rounded ${
+          className={`px-4 py-2 rounded-lg transition-colors ${
             currentPage <= 1
-              ? 'bg-gray-300 cursor-not-allowed'
-              : 'bg-blue-500 hover:bg-blue-600 text-white'
+              ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+              : 'bg-white hover:bg-sky-50 text-sky-600 border border-sky-100'
           }`}
           aria-disabled={currentPage <= 1}
         >
@@ -72,10 +72,10 @@ export default async function Home({ searchParams }: HomeProps) {
           <Link
             key={pageNum}
             href={`/?page=${pageNum}`}
-            className={`px-4 py-2 rounded ${
+            className={`px-4 py-2 rounded-lg transition-colors ${
               pageNum === currentPage
-                ? 'bg-blue-500 text-white'
-                : 'bg-gray-200 hover:bg-gray-300'
+                ? 'bg-sky-100 text-sky-600 border border-sky-200'
+                : 'bg-white hover:bg-sky-50 text-sky-600 border border-sky-100'
             }`}
           >
             {pageNum}
@@ -84,10 +84,10 @@ export default async function Home({ searchParams }: HomeProps) {
         
         <Link
           href={`/?page=${currentPage + 1}`}
-          className={`px-4 py-2 rounded ${
+          className={`px-4 py-2 rounded-lg transition-colors ${
             currentPage >= totalPages
-              ? 'bg-gray-300 cursor-not-allowed'
-              : 'bg-blue-500 hover:bg-blue-600 text-white'
+              ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+              : 'bg-white hover:bg-sky-50 text-sky-600 border border-sky-100'
           }`}
           aria-disabled={currentPage >= totalPages}
         >

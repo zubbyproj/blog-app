@@ -16,16 +16,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="bg-gray-50">
-      <body className={`${inter.className} min-h-screen flex flex-col`}>
+    <html lang="en">
+      <body className={`${inter.className} min-h-screen flex flex-col bg-gradient-to-br from-rose-50 via-sky-50 to-cyan-50`}>
         <Header />
-        <div className="flex-1 bg-gradient-to-b from-white to-gray-50">
-          <div className="container mx-auto px-4">
+        <div className="flex-1">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             {children}
           </div>
         </div>
-        <footer className="bg-gradient-to-r from-indigo-600 via-blue-600 to-blue-500 text-white py-8">
-          <div className="container mx-auto px-4 text-center text-sm">
+        <footer className="mt-12 bg-white bg-opacity-70 backdrop-blur-sm border-t border-sky-100 py-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-sky-600">
             <p>© {new Date().getFullYear()} Blog App. Built with Next.js</p>
           </div>
         </footer>
