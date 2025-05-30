@@ -25,17 +25,17 @@ export interface PaginatedPosts {
 }
 
 function getPlaceholderImage(slug: string): string {
-  // List of reliable placeholder images from Unsplash
+  // List of reliable placeholder images that are tech-related and visually appealing
   const placeholderImages = [
-    'https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?w=800&auto=format&fit=crop&q=80', // Code
-    'https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=800&auto=format&fit=crop&q=80', // Laptop
-    'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop&q=80', // Code on screen
-    'https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&auto=format&fit=crop&q=80', // Code
-    'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&auto=format&fit=crop&q=80', // Keyboard
+    'https://source.unsplash.com/800x600/?coding',
+    'https://source.unsplash.com/800x600/?technology',
+    'https://source.unsplash.com/800x600/?computer',
+    'https://source.unsplash.com/800x600/?programming',
+    'https://source.unsplash.com/800x600/?developer'
   ]
   
   // Use the slug to consistently select the same image for each post
-  const index = slug.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % placeholderImages.length
+  const index = Math.abs(slug.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)) % placeholderImages.length
   return placeholderImages[index]
 }
 
